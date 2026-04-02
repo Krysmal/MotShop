@@ -45,8 +45,35 @@ export default function CarPartsShop() {
   const categories = ["Wszystkie", ...new Set(productsData.map(p => p.category))];
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>Sklep z częściami samochodowymi</h1>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "Arial" }}>
+      
+      <div style={{ marginBottom: "30px", padding: "20px", borderRadius: "16px", background: "linear-gradient(135deg, #1f2937, #111827)", color: "white", boxShadow: "0 10px 25px rgba(0,0,0,0.2)" }}>
+        <h1 style={{ margin: 0, fontSize: "32px" }}>🚗 AutoParts Pro</h1>
+        <p style={{ marginTop: "8px", opacity: 0.8 }}>
+          Profesjonalne części samochodowe w najlepszych cenach
+        </p>
+
+        {/* KATEGORIE W NAGŁÓWKU */}
+        <div style={{ marginTop: "15px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setCategory(cat)}
+              style={{
+                padding: "8px 14px",
+                borderRadius: "20px",
+                border: "none",
+                cursor: "pointer",
+                background: category === cat ? "#2563eb" : "#374151",
+                color: "white",
+                fontSize: "14px"
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* FILTRY */}
       <div style={{ marginBottom: "20px" }}>
@@ -120,6 +147,32 @@ export default function CarPartsShop() {
           <strong>Suma: {total} zł</strong>
         </p>
       </div>
-    </div>
-  );
+          {/* STOPKA */}
+      <footer style={{ marginTop: "40px", padding: "20px", background: "#111827", color: "#e5e7eb", borderRadius: "12px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+          <div>
+            <h3>AutoParts Pro</h3>
+            <p>Twój zaufany dostawca części samochodowych od 2015 roku.</p>
+          </div>
+
+          <div>
+            <h4>Kontakt</h4>
+            <p>Email: kontakt@autopartspro.pl</p>
+            <p>Tel: +48 512 345 678</p>
+          </div>
+
+          <div>
+            <h4>Adres</h4>
+            <p>ul. Krakowska 12</p>
+            <p>32-800 Brzesko</p>
+            <p>Polska</p>
+          </div>
+        </div>
+
+        <div style={{ marginTop: "20px", textAlign: "center", fontSize: "14px", opacity: 0.7 }}>
+          © {new Date().getFullYear()} AutoParts Pro. Wszelkie prawa zastrzeżone.
+        </div>
+      </footer>
+      </div>
+    );
 }
