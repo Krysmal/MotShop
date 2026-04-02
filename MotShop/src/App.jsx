@@ -14,6 +14,8 @@ export default function CarPartsShop() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Wszystkie");
 
+  const categories = ["Wszystkie", ...new Set(productsData.map(p => p.category))];
+
   const addToCart = (product) => {
     const existing = cart.find((item) => item.id === product.id);
     if (existing) {
@@ -42,19 +44,15 @@ export default function CarPartsShop() {
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const categories = ["Wszystkie", ...new Set(productsData.map(p => p.category))];
-
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "Arial" }}>
-      
-      <div style={{ marginBottom: "30px", padding: "20px", borderRadius: "16px", background: "linear-gradient(135deg, #1f2937, #111827)", color: "white", boxShadow: "0 10px 25px rgba(0,0,0,0.2)" }}>
-        <h1 style={{ margin: 0, fontSize: "32px" }}>🚗 AutoParts Pro</h1>
-        <p style={{ marginTop: "8px", opacity: 0.8 }}>
-          Profesjonalne części samochodowe w najlepszych cenach
-        </p>
 
-        {/* KATEGORIE W NAGŁÓWKU */}
-        <div style={{ marginTop: "15px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+      {/* HEADER */}
+      <header style={{ padding: "20px", background: "linear-gradient(135deg, #1f2937, #111827)", color: "white" }}>
+        <h1 style={{ marginBottom: 20,marginTop: 10 }}>🚗 AutoParts Pro</h1>
+        <p style={{ opacity: 0.8 }}>Profesjonalne części samochodowe w najlepszych cenach</p>
+
+        <div style={{ marginTop: "10px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
           {categories.map((cat) => (
             <button
               key={cat}
@@ -65,90 +63,72 @@ export default function CarPartsShop() {
                 border: "none",
                 cursor: "pointer",
                 background: category === cat ? "#2563eb" : "#374151",
-                color: "white",
-                fontSize: "14px"
+                color: "white"
               }}
             >
               {cat}
             </button>
           ))}
         </div>
-      </div>
+      </header>
 
-      {/* FILTRY */}
-      <div style={{ marginBottom: "20px" }}>
-        <input
-          type="text"
-          placeholder="Szukaj części..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{ padding: "8px", marginRight: "10px" }}
-        />
+      {/* CONTENT */}
+      <main style={{ flex: 1, padding: "20px" }}>
 
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          style={{ padding: "8px" }}
-        >
-          {categories.map((cat) => (
-            <option key={cat}>{cat}</option>
-          ))}
-        </select>
-      </div>
+        <div style={{ marginBottom: "20px" }}>
+          <input
+            type="text"
+            placeholder="Szukaj części..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            style={{ padding: "8px", marginRight: "10px" }}
+          />
 
-      {/* PRODUKTY */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "20px",
-        }}
-      >
-        {filteredProducts.map((product) => (
-          <div
-            key={product.id}
-            style={{
-              border: "1px solid #ccc",
-              padding: "10px",
-              borderRadius: "10px",
-            }}
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            style={{ padding: "8px" }}
           >
-            <h2>{product.name}</h2>
-            <p>Kategoria: {product.category}</p>
-            <p>Cena: {product.price} zł</p>
-            <button onClick={() => addToCart(product)}>
-              Dodaj do koszyka
-            </button>
-          </div>
-        ))}
-      </div>
-
-      {/* KOSZYK */}
-      <div style={{ marginTop: "30px" }}>
-        <h2>Koszyk</h2>
-        {cart.length === 0 ? (
-          <p>Brak produktów w koszyku</p>
-        ) : (
-          <ul>
-            {cart.map((item) => (
-              <li key={item.id}>
-                {item.name} x{item.quantity} - {item.price * item.quantity} zł
-                <button
-                  onClick={() => removeFromCart(item.id)}
-                  style={{ marginLeft: "10px" }}
-                >
-                  Usuń
-                </button>
-              </li>
+            {categories.map((cat) => (
+              <option key={cat}>{cat}</option>
             ))}
-          </ul>
-        )}
-        <p>
-          <strong>Suma: {total} zł</strong>
-        </p>
-      </div>
-          {/* STOPKA */}
-      <footer style={{ marginTop: "40px", padding: "20px", background: "#111827", color: "#e5e7eb", borderRadius: "12px" }}>
+          </select>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+          {filteredProducts.map((product) => (
+            <div key={product.id} style={{ border: "1px solid #ccc", padding: "10px", borderRadius: "10px" }}>
+              <h2>{product.name}</h2>
+              <p>Kategoria: {product.category}</p>
+              <p>Cena: {product.price} zł</p>
+              <button onClick={() => addToCart(product)}>Dodaj do koszyka</button>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginTop: "30px" }}>
+          <h2>Koszyk</h2>
+          {cart.length === 0 ? (
+            <p>Brak produktów w koszyku</p>
+          ) : (
+            <ul>
+              {cart.map((item) => (
+                <li key={item.id}>
+                  {item.name} x{item.quantity} - {item.price * item.quantity} zł
+                  <button onClick={() => removeFromCart(item.id)} style={{ marginLeft: "10px" }}>
+                    Usuń
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p><strong>Suma: {total} zł</strong></p>
+        </div>
+
+      </main>
+
+      {/* FOOTER */}
+      <footer style={{ padding: "20px", background: "#111827", color: "#e5e7eb" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
           <div>
             <h3>AutoParts Pro</h3>
@@ -170,9 +150,10 @@ export default function CarPartsShop() {
         </div>
 
         <div style={{ marginTop: "20px", textAlign: "center", fontSize: "14px", opacity: 0.7 }}>
-          © {new Date().getFullYear()} AutoParts Pro. Wszelkie prawa zastrzeżone.
+          © {new Date().getFullYear()} AutoParts Pro
         </div>
       </footer>
-      </div>
-    );
+
+    </div>
+  );
 }
