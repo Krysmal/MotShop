@@ -49,7 +49,7 @@ export default function CarPartsShop() {
 
       {/* HEADER */}
       <header style={{ padding: "20px", background: "linear-gradient(135deg, #1f2937, #111827)", color: "white" }}>
-        <h1 style={{ marginBottom: 20,marginTop: 10 }}>🚗 AutoParts Pro</h1>
+        <h1 style={{ margin: 0 }}>🚗 AutoParts Pro</h1>
         <p style={{ opacity: 0.8 }}>Profesjonalne części samochodowe w najlepszych cenach</p>
 
         <div style={{ marginTop: "10px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
@@ -75,6 +75,13 @@ export default function CarPartsShop() {
       {/* CONTENT */}
       <main style={{ flex: 1, padding: "20px" }}>
 
+        {/* BANER */}
+        <div style={{ marginBottom: "30px", padding: "20px", borderRadius: "12px", background: "#f3f4f6" }}>
+          <h2>🔥 Promocje tygodnia</h2>
+          <p>Sprawdź najlepsze oferty na części samochodowe – nawet do -30%!</p>
+        </div>
+
+        {/* FILTRY */}
         <div style={{ marginBottom: "20px" }}>
           <input
             type="text"
@@ -95,17 +102,31 @@ export default function CarPartsShop() {
           </select>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+        {/* PRODUKTY */}
+        <h2>🛒 Produkty</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px", marginTop: "10px" }}>
           {filteredProducts.map((product) => (
-            <div key={product.id} style={{ border: "1px solid #ccc", padding: "10px", borderRadius: "10px" }}>
-              <h2>{product.name}</h2>
+            <div key={product.id} style={{ border: "1px solid #ccc", padding: "10px", borderRadius: "10px", background: "white" }}>
+              <h3>{product.name}</h3>
               <p>Kategoria: {product.category}</p>
-              <p>Cena: {product.price} zł</p>
+              <p><strong>{product.price} zł</strong></p>
               <button onClick={() => addToCart(product)}>Dodaj do koszyka</button>
             </div>
           ))}
         </div>
 
+        {/* ZALETY */}
+        <div style={{ marginTop: "40px", padding: "20px", background: "#f9fafb", borderRadius: "12px" }}>
+          <h2>Dlaczego warto u nas kupować?</h2>
+          <ul>
+            <li>✔ Szybka wysyłka (24h)</li>
+            <li>✔ Gwarancja jakości</li>
+            <li>✔ Zwrot do 14 dni</li>
+            <li>✔ Pomoc techniczna</li>
+          </ul>
+        </div>
+
+        {/* KOSZYK */}
         <div style={{ marginTop: "30px" }}>
           <h2>Koszyk</h2>
           {cart.length === 0 ? (
