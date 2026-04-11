@@ -49,8 +49,8 @@ export default function CarPartsShop() {
 
       {/* HEADER */}
       <header style={{ padding: "20px", background: "linear-gradient(135deg, #1f2937, #111827)", color: "white" }}>
-        <h1 style={{ margin: 0 }}>🚗 AutoParts Pro</h1>
-        <p style={{ opacity: 0.8 }}>Profesjonalne części samochodowe w najlepszych cenach</p>
+        <h1 style={{ margin: 10 }}>🚗 AutoParts Pro</h1>
+        <p style={{ opacity: 0.8, marginTop: 30}}>Profesjonalne części samochodowe w najlepszych cenach</p>
 
         <div style={{ marginTop: "10px", display: "flex", gap: "10px", flexWrap: "wrap" }}>
           {categories.map((cat) => (
@@ -77,7 +77,7 @@ export default function CarPartsShop() {
 
         {/* BANER */}
         <div style={{ marginBottom: "30px", padding: "20px", borderRadius: "12px", background: "#f3f4f6" }}>
-          <h2>🔥 Promocje tygodnia</h2>
+          <h2 style={{color: "grey"}}>🔥 Promocje tygodnia</h2>
           <p>Sprawdź najlepsze oferty na części samochodowe – nawet do -30%!</p>
         </div>
 
@@ -117,7 +117,7 @@ export default function CarPartsShop() {
 
         {/* ZALETY */}
         <div style={{ marginTop: "40px", padding: "20px", background: "#f9fafb", borderRadius: "12px" }}>
-          <h2>Dlaczego warto u nas kupować?</h2>
+          <h2 style={{color: "grey"}}>Dlaczego warto u nas kupować?</h2>
           <ul>
             <li>✔ Szybka wysyłka (24h)</li>
             <li>✔ Gwarancja jakości</li>
@@ -149,7 +149,7 @@ export default function CarPartsShop() {
       </main>
 
       {/* FOOTER */}
-      <footer style={{ padding: "20px", background: "#111827", color: "#e5e7eb" }}>
+      <footer style={{ padding: "20px", background: "#111827", color: "#cfd0d3" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
           <div>
             <h3>AutoParts Pro</h3>
