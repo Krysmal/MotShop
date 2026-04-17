@@ -94,10 +94,10 @@ export default function CarPartsShop() {
       </header>
 
       {/* CONTENT */}
-      <main style={{ flex: 1, padding: "20px" }}>
+      <main style={{ flex: 1, padding: "20px", justifyContent:"center" }}>
 
         {view === "about" ? (
-          <div style={{ maxWidth: "800px" }}>
+          <div style={{ }}>
             <h2>O nas</h2>
             <p>
               AutoParts Pro to dynamicznie rozwijająca się firma z branży motoryzacyjnej,
